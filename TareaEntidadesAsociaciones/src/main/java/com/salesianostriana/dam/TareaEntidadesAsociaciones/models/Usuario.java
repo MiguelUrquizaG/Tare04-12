@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -24,8 +26,10 @@ public class Usuario {
     private String username;
     private String password;
 
-    @ManyToMany
-    private List<RedSocial>redSocialList;
+    @ManyToMany(mappedBy = "usuarioList")
+    @Builder.Default
+    @ToString.Exclude
+    private Set<RedSocial> redSocialList = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
